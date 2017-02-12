@@ -12,7 +12,7 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.JoinTable;
-import javax.persistence.ManyToMany;
+import javax.persistence.OneToOne;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
 
@@ -26,9 +26,17 @@ public class TirParZone implements Serializable {
 	@GeneratedValue (strategy=GenerationType.AUTO)
 	private int id;
 	private int nbTir;
+	@OneToOne(cascade = CascadeType.ALL)
+    @JoinColumn(name="zonetir_fk",  referencedColumnName="zonetir_id", table="zonetir")
 	private ZoneTir zoneTir;
+	@OneToOne(cascade = CascadeType.ALL)
+    @JoinColumn(name="zonearret_fk",  referencedColumnName="zonearret_id", table="zonearret")
 	private ZoneArret zoneArret;
+	@OneToOne(cascade = CascadeType.ALL)
+    @JoinColumn(name="gardien_fk", referencedColumnName="gardien_id", table="gardien")
 	private Gardien gardien;
+	@OneToOne(cascade = CascadeType.ALL)
+    @JoinColumn(name="match_fk",  referencedColumnName="match_id", table="match")
 	private Match match;
 
 	

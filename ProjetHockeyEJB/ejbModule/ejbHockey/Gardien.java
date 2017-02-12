@@ -8,6 +8,7 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
+import javax.persistence.OneToOne;
 
 @Entity
 @NamedQueries ({
@@ -17,6 +18,7 @@ import javax.persistence.NamedQuery;
 public class Gardien implements Serializable {
 	@Id
 	@GeneratedValue (strategy=GenerationType.AUTO)
+    @OneToOne(mappedBy = "gardien")
 	private int id;
 	private String nom;
 	private String prenom;
