@@ -15,28 +15,33 @@ import javax.persistence.JoinTable;
 import javax.persistence.OneToOne;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
+import javax.persistence.Table;
+import javax.persistence.Column;
+
 
 @Entity
+@Table(name = "tirparzone")
 @NamedQueries ({
 	@NamedQuery(name="selectionToutTirParZone", query="SELECT p FROM TirParZone p"),
 })
 
 public class TirParZone implements Serializable {
 	@Id
+	@Column(name = "tirparzone_id")
 	@GeneratedValue (strategy=GenerationType.AUTO)
 	private int id;
 	private int nbTir;
 	@OneToOne(cascade = CascadeType.ALL)
-    @JoinColumn(name="zonetir_fk",  referencedColumnName="zonetir_id", table="zonetir")
+    @JoinColumn(name="zonetir_id")
 	private ZoneTir zoneTir;
 	@OneToOne(cascade = CascadeType.ALL)
-    @JoinColumn(name="zonearret_fk",  referencedColumnName="zonearret_id", table="zonearret")
+    @JoinColumn(name="zonearret_id")
 	private ZoneArret zoneArret;
 	@OneToOne(cascade = CascadeType.ALL)
-    @JoinColumn(name="gardien_fk", referencedColumnName="gardien_id", table="gardien")
+    @JoinColumn(name="gardien_id")
 	private Gardien gardien;
 	@OneToOne(cascade = CascadeType.ALL)
-    @JoinColumn(name="match_fk",  referencedColumnName="match_id", table="match")
+    @JoinColumn(name="match_id")
 	private Match match;
 
 	

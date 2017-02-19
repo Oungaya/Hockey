@@ -9,16 +9,20 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
+import javax.persistence.Table;
+import javax.persistence.Column;
+
 
 @Entity
+@Table(name = "zonetir")
 @NamedQueries ({
 	@NamedQuery(name="selectionToutZoneTir", query="SELECT p FROM ZoneTir p"),
 })
 
 public class ZoneTir implements Serializable {
 	@Id
+	@Column(name = "zonetir_id")
 	@GeneratedValue (strategy=GenerationType.AUTO)
-    @OneToOne(mappedBy = "tirparzone")
 	private int id;
 	private String nom;
 	public ZoneTir(String nom, String prenom) {

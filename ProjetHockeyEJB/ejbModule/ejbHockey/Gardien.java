@@ -9,16 +9,18 @@ import javax.persistence.Id;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
 import javax.persistence.OneToOne;
+import javax.persistence.Table;
+import javax.persistence.Column;
+
 
 @Entity
-@NamedQueries ({
-	@NamedQuery(name="selectionToutGardiens", query="SELECT p FROM Gardien p"),
-})
+@Table(name = "gardien")
+
 
 public class Gardien implements Serializable {
 	@Id
+	@Column(name = "gardien_id")
 	@GeneratedValue (strategy=GenerationType.AUTO)
-    @OneToOne(mappedBy = "gardien")
 	private int id;
 	private String nom;
 	private String prenom;

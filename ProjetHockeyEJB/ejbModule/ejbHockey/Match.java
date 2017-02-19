@@ -9,16 +9,18 @@ import javax.persistence.Id;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
 import javax.persistence.OneToOne;
+import javax.persistence.Table;
+import javax.persistence.Column;
+
 
 @Entity
-@NamedQueries ({
-	@NamedQuery(name="selectionToutMatch", query="SELECT p FROM Match p"),
-})
+@Table(name = "matchhockey")
+
 
 public class Match implements Serializable {
 	@Id
+	@Column(name = "matchhockey_id")
 	@GeneratedValue (strategy=GenerationType.AUTO)
-    @OneToOne(mappedBy = "tirparzone")
 	private int id;
 	private String nom;
 	private String equipe;
@@ -46,14 +48,16 @@ public class Match implements Serializable {
 	public void setEquipe(String equipe) {
 		this.equipe = equipe;
 	}
-	@Override
-	public String toString() {
-		return nom + " " + equipe;
-	}
+	
 	public String getDate() {
 		return date;
 	}
 	public void setDate(String date) {
 		this.date = date;
 	}
+	@Override
+	public String toString() {
+		return nom + " " + equipe;
+	}
+
 }

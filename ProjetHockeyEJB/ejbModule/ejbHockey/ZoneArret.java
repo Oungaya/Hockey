@@ -9,8 +9,12 @@ import javax.persistence.Id;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
 import javax.persistence.OneToOne;
+import javax.persistence.Table;
+import javax.persistence.Column;
+
 
 @Entity
+@Table(name = "zonearret")
 @NamedQueries ({
 	@NamedQuery(name="selectionToutZoneTirArret", query="SELECT p FROM ZoneArret p"),
 })
@@ -18,7 +22,7 @@ import javax.persistence.OneToOne;
 public class ZoneArret implements Serializable {
 	@Id
 	@GeneratedValue (strategy=GenerationType.AUTO)
-    @OneToOne(mappedBy = "tirparzone")
+	@Column(name = "zonearret")
 	private int id;
 	private String nom;
 	public ZoneArret(String nom, String prenom) {

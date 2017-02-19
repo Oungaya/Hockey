@@ -8,14 +8,18 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
+import javax.persistence.Table;
+import javax.persistence.Column;
 
 @Entity
+@Table(name = "utilisateur")
 @NamedQueries ({
 	@NamedQuery(name="selectionToutUtilisateur", query="SELECT p FROM Utilisateur p"),
 })
 
 public class Utilisateur implements Serializable {
 	@Id
+	@Column(name = "utilisateur_id")
 	@GeneratedValue (strategy=GenerationType.AUTO)
 	private int id;
 	private String nom;
