@@ -24,6 +24,9 @@ public class Gardien implements Serializable {
 	private int id;
 	private String nom;
 	private String prenom;
+	public Gardien(int id) {
+		this.id = id;
+	}
 	public Gardien(String nom, String prenom) {
 		this.nom = nom;
 		this.prenom = prenom;

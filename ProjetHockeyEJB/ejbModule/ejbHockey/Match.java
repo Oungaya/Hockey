@@ -25,6 +25,9 @@ public class Match implements Serializable {
 	private String nom;
 	private String equipe;
 	private String date;
+	public Match(int idMatch){
+		this.id = idMatch;
+	}
 	public Match(String nom, String equipe, String date) {
 		this.nom = nom;
 		this.equipe = equipe;
