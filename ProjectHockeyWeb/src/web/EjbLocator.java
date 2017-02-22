@@ -14,6 +14,7 @@ import ejbHockey.ZoneArretManagerRemote;
 import ejbHockey.ZoneTirManagerRemote;
 
 
+
 public class EjbLocator {
 	private static Context ctx;
 	private static EjbLocator instance = new EjbLocator();
@@ -30,6 +31,7 @@ public class EjbLocator {
 			final Context context = new InitialContext(jndiProperties);
 			final String appName = "ProjetHockeyEAR";
 			final String moduleName = "ProjetHockeyEJB";
+
 			return (T) context.lookup("java:global/" + appName + "/" + moduleName + "/" + beanName + "!" + ejbClass.getName());
 		} catch (NamingException e) {
 			return null;
@@ -56,3 +58,4 @@ public class EjbLocator {
 	}
 
 	}
+

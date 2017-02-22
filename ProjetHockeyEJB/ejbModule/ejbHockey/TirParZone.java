@@ -23,6 +23,7 @@ import javax.persistence.Column;
 @Table(name = "tirparzone")
 @NamedQueries ({
 	@NamedQuery(name="selectionToutTirParZone", query="SELECT p FROM TirParZone p"),
+	@NamedQuery(name="selectionUnTirParZone", query="SELECT p FROM TirParZone p where zonearret_id= :zonearret and zonetir_id = :zonetir and match_id= :match and gardien_id = :gardien")
 })
 
 public class TirParZone implements Serializable {
@@ -44,7 +45,14 @@ public class TirParZone implements Serializable {
     @JoinColumn(name="match_id")
 	private Match match;
 
-	
+	public TirParZone(){}
+	public TirParZone(int nbTir, int idZoneTir, int idZoneArret, int idGardien, int idMatch){
+		this.nbTir = nbTir;
+		this.zoneTir = new ZoneTir(idZoneTir);
+		this.zoneArret = new ZoneArret(idZoneArret);
+		this.gardien = new Gardien(idGardien);
+		this.match = new Match(idMatch);
+	}
 	public TirParZone(int nbTir, ZoneTir zoneTir, ZoneArret zoneArret, Gardien gardien, Match match) {
 		this.nbTir = nbTir;
 		this.zoneTir = zoneTir;
