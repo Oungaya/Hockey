@@ -15,6 +15,10 @@ import javax.persistence.Column;
 @Table(name = "utilisateur")
 @NamedQueries ({
 	@NamedQuery(name="selectionToutUtilisateur", query="SELECT p FROM Utilisateur p"),
+	@NamedQuery(
+		    name="verif_credentials",
+		    query="SELECT c FROM Utilisateur c WHERE c.nom = :paramName AND c.mdp = :paramPassword"
+		)
 })
 
 public class Utilisateur implements Serializable {
@@ -24,6 +28,9 @@ public class Utilisateur implements Serializable {
 	private int id;
 	private String nom;
 	private String mdp;
+	public Utilisateur(){
+		
+	}
 	public Utilisateur(String nom, String mdp) {
 		this.nom = nom;
 		this.mdp = mdp;

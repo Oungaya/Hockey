@@ -15,9 +15,12 @@ public class MatchManager implements MatchManagerRemote {
 	public MatchManager() {}
 	@PersistenceContext
 	EntityManager em;
-	public Match rechercherMatch(int id) {
-		return em.find(Match.class, id);
-	}
+	
+	public List<Match> rechercherMatch(int id) {
+		return em.createNamedQuery("get_match")
+				.setParameter("paramId", id)
+				.getResultList();
+		}
 	public List<Match> listerMatchs() {
 		return em.createNamedQuery("selectionToutMatch").getResultList(); 
 	}

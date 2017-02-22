@@ -5,6 +5,6 @@ import javax.ejb.Remote;
 
 @Remote
 public interface MatchManagerRemote {
-	public Match rechercherMatch(int id);
+	public List<Match> rechercherMatch(int id);
 	public List<Match> listerMatchs();
 }

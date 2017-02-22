@@ -1,6 +1,5 @@
 package ejbHockey;
 
-import java.util.Collection;
 import java.util.List;
 
 import javax.ejb.LocalBean;
@@ -20,6 +19,13 @@ public class UtilisateurManager implements UtilisateurManagerRemote {
 	}
 	public List<Utilisateur> listerUtilisateurs() {
 		return em.createNamedQuery("selectionToutUtilisateur").getResultList(); 
+	}
+	public List<Utilisateur> isLogged(String name, String password)
+	{
+		return em.createNamedQuery("verif_credentials")
+				.setParameter("paramName", name)
+				.setParameter("paramPassword", password)
+				.getResultList();
 	}
 	
 }
