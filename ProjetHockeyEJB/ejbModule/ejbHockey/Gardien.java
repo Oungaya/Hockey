@@ -15,8 +15,10 @@ import javax.persistence.Column;
 
 @Entity
 @Table(name = "gardien")
-
-
+@NamedQueries ({
+	@NamedQuery(name="selectionToutGardiens", query="SELECT p FROM Gardien p")
+	
+})
 public class Gardien implements Serializable {
 	@Id
 	@Column(name = "gardien_id")
@@ -26,6 +28,9 @@ public class Gardien implements Serializable {
 	private String prenom;
 	public Gardien(int id) {
 		this.id = id;
+	}
+	public Gardien(){
+		
 	}
 	public Gardien(String nom, String prenom) {
 		this.nom = nom;

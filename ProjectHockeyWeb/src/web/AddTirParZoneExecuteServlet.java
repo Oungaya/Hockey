@@ -36,7 +36,7 @@ public class AddTirParZoneExecuteServlet extends HttpServlet {
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		TirParZone tirZone = new TirParZone();
-		tirZone.setGardien(new Gardien(Integer.parseInt(request.getParameter("tirzone.idGardien"))));
+		/*tirZone.setGardien(new Gardien(Integer.parseInt(request.getParameter("tirzone.idGardien"))));
 		tirZone.setMatch(new Match(Integer.parseInt(request.getParameter("tirzone.idMatch"))));
 		tirZone.setZoneTir(new ZoneTir(Integer.parseInt(request.getParameter("tirzone.idZonetir"))));
 		tirZone.setZoneArret(new ZoneArret(Integer.parseInt(request.getParameter("tirzone.idZonearret"))));

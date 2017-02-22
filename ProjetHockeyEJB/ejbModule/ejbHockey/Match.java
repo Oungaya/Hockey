@@ -15,6 +15,7 @@ import javax.persistence.Column;
 
 @Entity
 @Table(name = "matchhockey")
+@NamedQuery(name="selectionToutMatch", query="SELECT p FROM Match p")
 
 
 public class Match implements Serializable {
@@ -25,6 +26,10 @@ public class Match implements Serializable {
 	private String nom;
 	private String equipe;
 	private String date;
+	public Match()
+	{
+		
+	}
 	public Match(int idMatch){
 		this.id = idMatch;
 	}

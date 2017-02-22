@@ -10,5 +10,6 @@ public interface TirParZoneManagerRemote {
 
 	public TirParZone ajouterTirParZone(TirParZone contact);
 	public List<TirParZone> listerTirParZone();
+	public void ajouterTirParZone(int idZoneTir, int idZoneArret, int idGardien, int idMatch);
 	
 }
