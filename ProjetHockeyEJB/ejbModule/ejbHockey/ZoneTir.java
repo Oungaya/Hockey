@@ -25,6 +25,10 @@ public class ZoneTir implements Serializable {
 	@GeneratedValue (strategy=GenerationType.AUTO)
 	private int id;
 	private String nom;
+	
+	public ZoneTir(){
+		
+	}
 	public ZoneTir(int idZoneTir) {
 		this.id = idZoneTir;
 	}

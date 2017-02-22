@@ -242,7 +242,7 @@ pageEncoding="ISO-8859-1"%>
                 var zone_shoot;
                 var gardien;
                 var resultat;
-                var match_id;
+                var match_id=1;
                 
                 function Moveworkflow(id_page){
                     $(".case-indicateur").removeClass("case-indicateur-active");
@@ -304,9 +304,11 @@ pageEncoding="ISO-8859-1"%>
                 		    },
                 		    success: function(msg){
                 		        alert('wow' + msg);
+                          	   	Moveworkflow(1);
                 		    },
                 		    error:function()
                 		    {
+                         	   Moveworkflow(1);
 								alert('erreur');
                      		}
                 		});

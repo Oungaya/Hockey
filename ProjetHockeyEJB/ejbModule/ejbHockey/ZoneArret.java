@@ -25,6 +25,10 @@ public class ZoneArret implements Serializable {
 	@Column(name = "zonearret")
 	private int id;
 	private String nom;
+	
+	public ZoneArret(){
+		
+	}
 	public ZoneArret(int idZoneArret){
 		this.id = idZoneArret;
 	}

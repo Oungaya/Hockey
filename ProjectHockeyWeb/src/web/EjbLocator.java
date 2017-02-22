@@ -43,18 +43,18 @@ public class EjbLocator {
 	public GardienManagerRemote getGardienManager(){
 		return getEjb(GardienManagerRemote.class, "GardienManager");
 	}
-	public TirParZoneManagerRemote getTirParZoneManagerRemote(){
+	public TirParZoneManagerRemote getTirParZoneManager(){
 		return getEjb(TirParZoneManagerRemote.class, "TirParZoneManager");
 	}
 	public MatchManagerRemote getMatchManager(){
 		return getEjb(MatchManagerRemote.class, "MatchManager");
 
 	}
-	public ZoneTirManagerRemote getZoneTirManagerRemote(){
-		return getEjb(ZoneTirManagerRemote.class, "ZoneTirManagerRemote");
+	public ZoneTirManagerRemote getZoneTirManager(){
+		return getEjb(ZoneTirManagerRemote.class, "ZoneTirManager");
 	}
-	public ZoneArretManagerRemote getZoneArretManagerRemote(){
-		return getEjb(ZoneArretManagerRemote.class, "ZoneArretManagerRemote");
+	public ZoneArretManagerRemote getZoneArretManager(){
+		return getEjb(ZoneArretManagerRemote.class, "ZoneArretManager");
 	}
 
 	}

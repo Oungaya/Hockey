@@ -9,23 +9,25 @@ import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 @Stateless
 @LocalBean
-
 public class TirParZoneManager implements TirParZoneManagerRemote {
 
 	public TirParZoneManager() {}
 	@PersistenceContext
 	EntityManager em;
-	public void ajouterTirParZone(int idZoneTir, int idZoneArret, int idGardien, int idMatch){
+	public void ajouterTirParZone(ZoneTir zonetir, ZoneArret zonearret, Gardien gardien, Match match, int result){
+		
+
 		List<TirParZone> tirparzonelist = em.createNamedQuery("selectionUnTirParZone")
-				.setParameter("zonetir", idZoneTir)
-				.setParameter("zonearret", idZoneArret)
-				.setParameter("match", idMatch)
-				.setParameter("gardien", idGardien).getResultList();
+				.setParameter("but", result)
+				.setParameter("zonetir", zonetir.getId())
+				.setParameter("zonearret", zonearret.getId())
+				.setParameter("match", match.getId())
+				.setParameter("gardien", gardien.getId()).getResultList();
+		
 		if(tirparzonelist.isEmpty()){
-			TirParZone tirParZone = new TirParZone(1, idZoneTir, idZoneArret, idGardien, idMatch);
-			em.persist(tirParZone);
-		}
-		else {
+			TirParZone tirparzone = new TirParZone(1, zonetir, zonearret, gardien, match, result);
+			em.merge(tirparzone);
+		}else{
 			TirParZone tirParZone = tirparzonelist.get(0);
 			tirParZone.setNbTir(tirParZone.getNbTir()+1);
 			em.merge(tirParZone);

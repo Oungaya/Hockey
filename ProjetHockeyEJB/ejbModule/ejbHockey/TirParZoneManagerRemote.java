@@ -8,8 +8,8 @@ import javax.ejb.Remote;
 
 public interface TirParZoneManagerRemote {
 
-	public TirParZone ajouterTirParZone(TirParZone contact);
+	public TirParZone ajouterTirParZone(TirParZone tirParZone);
 	public List<TirParZone> listerTirParZone();
-	public void ajouterTirParZone(int idZoneTir, int idZoneArret, int idGardien, int idMatch);
+	public void ajouterTirParZone(ZoneTir zonetir, ZoneArret zonearret, Gardien gardien, Match match, int result);
 	
 }
