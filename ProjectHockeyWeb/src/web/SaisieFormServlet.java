@@ -12,6 +12,7 @@ import javax.servlet.http.HttpSession;
 
 import ejbHockey.GardienManagerRemote;
 import ejbHockey.MatchManagerRemote;
+import ejbHockey.SessionManagerRemote;
 
 /**
  * Servlet implementation class SaisieFormServlet
@@ -40,12 +41,12 @@ public class SaisieFormServlet extends HttpServlet {
 		MatchManagerRemote matchmanagerRemote = EjbLocator.getLocator().getMatchManager();
 		request.setAttribute("listMatchs", matchmanagerRemote.listerMatchs());
 		
-		//on récupère la session qu'on envoie à la jsp
-		//qui va vérifier la véracité de la session
-		HttpSession session=request.getSession();  
-		String auth = (String)session.getAttribute("auth");
-		if (auth == "true")
-		{
+
+		String token = (String)request.getParameter("token");
+		System.out.println("token recu : " + token);
+		SessionManagerRemote sessionManager = EjbLocator.getLocator().getSessionManager();
+		
+		if (sessionManager.checkToken(token)){
 			rd = request.getRequestDispatcher("/WEB-INF/jsps/saisie.jsp");
 		}else{
 			rd = request.getRequestDispatcher("/WEB-INF/jsps/auth.jsp");

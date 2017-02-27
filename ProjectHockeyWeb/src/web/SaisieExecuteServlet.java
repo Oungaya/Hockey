@@ -16,6 +16,7 @@ import ejbHockey.GardienManagerRemote;
 import ejbHockey.Match;
 import ejbHockey.MatchManager;
 import ejbHockey.MatchManagerRemote;
+import ejbHockey.SessionManagerRemote;
 import ejbHockey.TirParZone;
 import ejbHockey.TirParZoneManagerRemote;
 import ejbHockey.Utilisateur;
@@ -48,28 +49,39 @@ public class SaisieExecuteServlet extends HttpServlet {
 		int idZoneTir = Integer.parseInt(request.getParameter("zone_shoot_id"));
 		int idZoneArret = Integer.parseInt(request.getParameter("zone_tir_id"));
 		int idGardien =  Integer.parseInt(request.getParameter("gardien_id"));
-		int result = Integer.parseInt(request.getParameter("resultat_id"));
+		int but = Integer.parseInt(request.getParameter("resultat_id"));
 		int idMatch = 1;
 		
-		//get zonetir
-		ZoneTirManagerRemote zoneTirManager = EjbLocator.getLocator().getZoneTirManager();
-		ZoneTir zonetir = zoneTirManager.rechercherZoneTir(idZoneTir);
-		
-		//get zonearret
-		ZoneArretManagerRemote zoneArretManager = EjbLocator.getLocator().getZoneArretManager();
-		ZoneArret zonearret = zoneArretManager.rechercherZoneArret(idZoneArret);
-		
-		//getGardie
-		GardienManagerRemote gardienManager = EjbLocator.getLocator().getGardienManager();
-		Gardien gardien = gardienManager.rechercherGadien(idGardien);
-		
-		//getMatch
-		MatchManagerRemote matchManager = EjbLocator.getLocator().getMatchManager();
-		Match match = matchManager.rechercherMatch(idMatch);
+		String token = (String)request.getParameter("token");
+		System.out.println("token recu : " + token);
+		SessionManagerRemote sessionManager = EjbLocator.getLocator().getSessionManager();
+		if (sessionManager.checkToken(token)){
+			System.out.println("TOKEN VALIDE");
+			//get zonetir
+			ZoneTirManagerRemote zoneTirManager = EjbLocator.getLocator().getZoneTirManager();
+			ZoneTir zonetir = zoneTirManager.rechercherZoneTir(idZoneTir);
+			
+			//get zonearret
+			ZoneArretManagerRemote zoneArretManager = EjbLocator.getLocator().getZoneArretManager();
+			ZoneArret zonearret = zoneArretManager.rechercherZoneArret(idZoneArret);
+			
+			//getGardie
+			GardienManagerRemote gardienManager = EjbLocator.getLocator().getGardienManager();
+			Gardien gardien = gardienManager.rechercherGadien(idGardien);
+			
+			//getMatch
+			MatchManagerRemote matchManager = EjbLocator.getLocator().getMatchManager();
+			Match match = matchManager.rechercherMatch(idMatch);
+	
+			
+			TirParZoneManagerRemote tirParZoneManager = EjbLocator.getLocator().getTirParZoneManager();
+			tirParZoneManager.ajouterTirParZone( zonetir,  zonearret, gardien, match, but);
+		}else{
+			RequestDispatcher rd;
+			response.setStatus(HttpServletResponse.SC_NOT_FOUND);
+		}
 
-		
-		TirParZoneManagerRemote tirParZoneManager = EjbLocator.getLocator().getTirParZoneManager();
-		tirParZoneManager.ajouterTirParZone( zonetir,  zonearret, gardien, match, result);
+	
 
 
 		

@@ -14,7 +14,7 @@ pageEncoding="ISO-8859-1"%>
     
 <html>
     <head>
-        <title>TODO supply a title</title>
+        <title>Hockey | Saisie</title>
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
          <link rel="stylesheet" href="${pageContext.request.contextPath}/css/bootstrap.css"/>
@@ -43,24 +43,27 @@ pageEncoding="ISO-8859-1"%>
 
                <ul class="nav navbar-nav collapse navbar-collapse" id="navigation">
                    <li><a href="#">Accueil</a></li>
-                   <li><a href="http://localhost:8080/ProjectHockeyWeb/LogoutExecuteServlet">Deconnexion</a></li>
+                   <li><a class="deconnexion">Deconnexion</a></li>
                </ul>
             <div class="line"></div>
         </div>
-               
-    	<div id="choice_match">
+            
+    	
+   	</nav>
+   		 <div class="container" style="text-align:center;" id="choice_match">
     		<%
 						Iterator it = ((Collection)request.getAttribute("listMatchs")).iterator();
 						while(it.hasNext()) {
 						Match match = (Match)it.next();
+						if (match.getId() != 0){
 			%>
 						<label><%= match.getNom() %></label>
 						<input type="radio" name="match" value="<%= match.getId() %>">					
 			<%
+						}
 				}
 			%> 
-    	</div>
-   	</nav>
+    	</div>  
         <div class="container" id="presentation">
             <div class="titre"><span>D&eacute;clarer un tir</span></div>
             <div class="line2"></div>
@@ -153,7 +156,7 @@ pageEncoding="ISO-8859-1"%>
 						Gardien gardien = (Gardien)ip.next();
 					%>
 					
-					<div class="case-gardien case-gardien" data-id="<%= gardien.getId() %>" data-label="Laurence Parisot">
+					<div class="case-gardien case-gardien" data-id="<%= gardien.getId() %>" data-label="<%= gardien.getPrenom() %>">
                             <div class="case-gardien-photo">
                                 <img src="img/gardien1.jpg"/>
                             </div>
@@ -209,7 +212,7 @@ pageEncoding="ISO-8859-1"%>
                         <span class="glyphicon glyphicon-ban-circle"></span>
                     </div>
                     <div class="case-indicateur" data-id="3">
-                        <p>Choix du résultat</p>
+                        <p>Choix du r&eacute;sultat</p>
                         <span class="glyphicon glyphicon-ban-circle"></span>
                     </div>
                     <div class="case-indicateur" data-id="4">
@@ -291,10 +294,25 @@ pageEncoding="ISO-8859-1"%>
                 	   console.log(match_id);
 
                     });
+            	   function getCookie(cookiename)
+            	   {
+            	     var re = new RegExp(cookiename + "=([^;]+)");
+            	     var value = re.exec(document.cookie);
+            	     return (value != null) ? unescape(value[1]) : null;
+            	   }
+            	   $(".deconnexion").click(function(){
+            		   var token = getCookie("token");
+                	   var result = token.replace(/\"/g,'');
+            		   document.location.replace('http://localhost:8080/ProjectHockeyWeb/LogoutExecuteServlet?web=true&token=' + result);
+                	});
+            	   
                    $(".btn-confirmer").click(function(){
+                
+                	   var token = getCookie("token");
+                	   var result = token.replace(/\"/g,'');
                 	   $.ajax({
                 		    type: 'POST',
-                		    url: 'http://localhost:8080/ProjectHockeyWeb/SaisieExecuteServlet',       		    
+                		    url: 'http://localhost:8080/ProjectHockeyWeb/SaisieExecuteServlet?token=' + result,       		    
                 		    data: { 
                 		    	 "zone_tir_id" : zone_tir_id,
                                  "zone_shoot_id" : zone_shoot_id,
@@ -303,13 +321,11 @@ pageEncoding="ISO-8859-1"%>
                                  "match_id" : match_id
                 		    },
                 		    success: function(msg){
-                		        alert('wow' + msg);
                           	   	Moveworkflow(1);
                 		    },
                 		    error:function()
                 		    {
-                         	   Moveworkflow(1);
-								alert('erreur');
+                     		   document.location.replace('http://localhost:8080/ProjectHockeyWeb/LoginFormServlet');
                      		}
                 		});
                    });

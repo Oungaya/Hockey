@@ -10,6 +10,8 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
+import ejbHockey.SessionManagerRemote;
+
 /**
  * Servlet implementation class LogoutExecuteServlet
  */
@@ -31,11 +33,21 @@ public class LogoutExecuteServlet extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
 		RequestDispatcher rd = null;
-		rd = request.getRequestDispatcher("/LoginFormServlet");
-		HttpSession session=request.getSession();  
-	    session.invalidate();  
-		rd.forward(request, response);
-		return;
+
+		String token = request.getParameter("token");
+		System.out.println("Servlet token reçu : " + token);
+		SessionManagerRemote sessionManager = EjbLocator.getLocator().getSessionManager();
+		sessionManager.destroyToken(token);
+		String web = request.getParameter("web");
+		if (web == null)
+		{
+			web="";
+		}
+		if (web.equals("true")){
+			rd = request.getRequestDispatcher("/WEB-INF/jsps/auth.jsp");
+			rd.forward(request, response);
+		}
+
 
 	}
 

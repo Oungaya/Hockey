@@ -8,6 +8,7 @@ import javax.naming.NamingException;
 
 import ejbHockey.GardienManagerRemote;
 import ejbHockey.MatchManagerRemote;
+import ejbHockey.SessionManagerRemote;
 import ejbHockey.TirParZoneManagerRemote;
 import ejbHockey.UtilisateurManagerRemote;
 import ejbHockey.ZoneArretManagerRemote;
@@ -55,6 +56,9 @@ public class EjbLocator {
 	}
 	public ZoneArretManagerRemote getZoneArretManager(){
 		return getEjb(ZoneArretManagerRemote.class, "ZoneArretManager");
+	}
+	public SessionManagerRemote getSessionManager(){
+		return getEjb(SessionManagerRemote.class, "SessionManager");
 	}
 
 	}

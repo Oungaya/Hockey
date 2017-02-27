@@ -3,10 +3,26 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
+        <script src="${pageContext.request.contextPath}/js/vendor/jquery-1.11.2.js"></script>
+
 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
 <title>Redirection...</title>
 <script>
-window.setTimeout("location=('http://localhost:8080/ProjectHockeyWeb/SaisieFormServlet');",3000);
+function getCookie(cookiename)
+{
+  var re = new RegExp(cookiename + "=([^;]+)");
+  var value = re.exec(document.cookie);
+  return (value != null) ? unescape(value[1]) : null;
+}
+var token = getCookie("token");
+var result = token.replace(/\"/g,'');
+
+
+var url = 'http://localhost:8080/ProjectHockeyWeb/SaisieFormServlet?token=' + result;
+console.log(url);
+
+setTimeout(function(){location.href=url} , 3000);   
+
 </script>
 </head>
 <body>

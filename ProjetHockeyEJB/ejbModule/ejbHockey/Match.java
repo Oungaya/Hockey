@@ -65,7 +65,10 @@ public class Match implements Serializable {
 	}
 	@Override
 	public String toString() {
-		return nom + " " + equipe;
+		if (this.getId() == 0){
+			return date;
+		}
+		return  date + " - " + equipe + " - " + nom ;
 	}
 
 }

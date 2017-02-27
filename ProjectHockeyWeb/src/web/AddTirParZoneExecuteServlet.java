@@ -51,6 +51,7 @@ public class AddTirParZoneExecuteServlet extends HttpServlet {
 		}
 		rd.forward(request, response);
 		*/
+		//SELECT sum(nbTir), sum(but) FROM tirparzone where zonetir_id = 1
 	}
 
 }

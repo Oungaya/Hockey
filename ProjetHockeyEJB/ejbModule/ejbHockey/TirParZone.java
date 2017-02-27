@@ -23,7 +23,12 @@ import javax.persistence.Column;
 @Table(name = "tirparzone")
 @NamedQueries ({
 	@NamedQuery(name="selectionToutTirParZone", query="SELECT p FROM TirParZone p"),
-	@NamedQuery(name="selectionUnTirParZone", query="SELECT p FROM TirParZone p where but = :but and zonearret_id= :zonearret and zonetir_id = :zonetir and match_id= :match and gardien_id = :gardien")
+	@NamedQuery(name="selectionUnTirParZone", query="SELECT p FROM TirParZone p where zonearret_id= :zonearret and zonetir_id = :zonetir and match_id= :match and gardien_id = :gardien"),
+	@NamedQuery(name="selectionNbTirZoneTir", query="SELECT p FROM TirParZone p where zonetir_id = :zonetir and match_id= :match and gardien_id = :gardien"),
+	@NamedQuery(name="selectionNbTirZoneTirAll", query="SELECT p FROM TirParZone p where zonetir_id = :zonetir and gardien_id = :gardien"),
+	@NamedQuery(name="selectionNbTirZoneArret", query="SELECT p FROM TirParZone p where zonearret_id = :zonearret and match_id= :match and gardien_id = :gardien"),
+	@NamedQuery(name="selectionNbTirZoneArretAll", query="SELECT p FROM TirParZone p where zonearret_id = :zonearret and gardien_id = :gardien")
+
 })
 
 public class TirParZone implements Serializable {
@@ -57,7 +62,12 @@ public class TirParZone implements Serializable {
 		this.gardien = gardien;
 		this.match = match;
 	}
-
+	public int getBut(){
+		return but;
+	}
+	public void setBut(int but){
+		this.but = but;
+	}
 	public int getId() {
 		return id;
 	}

@@ -18,6 +18,7 @@ public class ZoneTirManager implements ZoneTirManagerRemote {
 	public ZoneTir rechercherZoneTir(int id) {
 		return em.find(ZoneTir.class, id);
 	}
+	
 	public List<ZoneTir> listerZoneTir() {
 		return em.createNamedQuery("selectionToutZoneTir").getResultList(); 
 	}
